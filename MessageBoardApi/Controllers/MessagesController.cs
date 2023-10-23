@@ -17,6 +17,7 @@ public class MessagesController : ControllerBase
     _db = db;
   }
 
+  // GET: api/messages?groupId=
   [HttpGet]
   public async Task<List<Message>> Get(int groupId)
   {
@@ -26,7 +27,38 @@ public class MessagesController : ControllerBase
                             .Include(message => message.User)
                             .ToListAsync();
   }
+
+  // GET: api/messages/{id}
+  [HttpGet("{id}")]
+  public async Task<ActionResult<Message>> GetMessage(int id)
+  {
+    Message message = await _db.Messages
+                                        .Include(message => message.Group)
+                                        .Include(message => message.User)
+                                        .FirstOrDefaultAsync(message => message.MessageId == id);
+
+    if (message == null)
+    {
+      return NotFound();
+    }
+
+    return message;
+  }
+
+  // POST: api/messages
+  [HttpPost]
+  public async Task<ActionResult<Message>> Post(Message message)
+  {
+    _db.Messages.Add(message); // our Messages table only has fields for Id's, the User and Group objects are Model properties that define the relationship in our program, but not in our database
+    await _db.SaveChangesAsync();
+    return CreatedAtAction(nameof(GetMessage), new { id = message.MessageId }, message);
+  }
 }
+
+
+
+
+
 
 
 
