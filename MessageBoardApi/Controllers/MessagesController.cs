@@ -20,13 +20,19 @@ public class MessagesController : ControllerBase
 
   // GET: api/messages?groupId=
   [HttpGet]
-  public async Task<List<Message>> Get(int groupId)
+  public async Task<ActionResult<IEnumerable<Message>>> Get(int groupId)
   {
-    return await _db.Messages
-                            .Where(entry => entry.GroupId == groupId)
-                            .Include(message => message.Group)
-                            .Include(message => message.User)
-                            .ToListAsync();
+    IQueryable<Message> query = _db.Messages.AsQueryable();
+
+    if (groupId > 0)
+    {
+      query = query.Where(entry => entry.GroupId == groupId);
+    }
+
+    return await query
+                      .Include(message => message.Group)
+                      .Include(message => message.User)
+                      .ToListAsync();
   }
 
   // GET: api/messages/{id}
