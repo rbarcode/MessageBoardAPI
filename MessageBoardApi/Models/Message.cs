@@ -8,5 +8,13 @@ namespace MessageBoardApi.Models
 
     public string Text { get; set; }
 
+    public int GroupId { get; set; }
+
+    public int UserId { get; set; }
+
+    public Group Group { get; set; } // navigation property - One to Many
+
+    public User User { get; set; } // navigation property - One to Many
+
   }
 }
