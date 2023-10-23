@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MessageBoardApi.Models;
+using MessageBoardApi.Migrations;
 
 
 
@@ -52,6 +53,39 @@ public class MessagesController : ControllerBase
     _db.Messages.Add(message); // our Messages table only has fields for Id's, the User and Group objects are Model properties that define the relationship in our program, but not in our database
     await _db.SaveChangesAsync();
     return CreatedAtAction(nameof(GetMessage), new { id = message.MessageId }, message);
+  }
+
+  [HttpPut("{id}")]
+  public async Task<IActionResult> Put(int id, Message message)
+  {
+    if (id != message.MessageId)
+    {
+      return BadRequest();
+    }
+
+    _db.Messages.Update(message);
+
+    try
+    {
+      await _db.SaveChangesAsync();
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+      if (!MessageExists(id))
+      {
+        return NotFound();
+      }
+      else
+      {
+        throw;
+      }
+    }
+    return NoContent();
+  }
+
+  private bool MessageExists(int id)
+  {
+    return _db.Messages.Any(e => e.MessageId == id);
   }
 }
 
