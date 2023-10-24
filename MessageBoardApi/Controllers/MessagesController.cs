@@ -17,14 +17,25 @@ public class MessagesController : ControllerBase
   }
 
   // GET: api/messages{?groupId={id}}
+  // dateFrom, dateTo: query format must be mm/dd/yyyy
   [HttpGet]
-  public async Task<ActionResult<IEnumerable<Message>>> Get(int groupId)
+  public async Task<ActionResult<IEnumerable<Message>>> Get(int groupId, string dateFrom, string dateTo)
   {
     IQueryable<Message> query = _db.Messages.AsQueryable();
 
     if (groupId > 0)
     {
       query = query.Where(entry => entry.GroupId == groupId);
+    }
+
+    if (dateFrom != null)
+    {
+      query = query.Where(entry => entry.Date >= DateTime.Parse(dateFrom));
+    }
+
+    if (dateTo != null)
+    {
+      query = query.Where(entry => entry.Date <= DateTime.Parse(dateTo));
     }
 
     return await query
