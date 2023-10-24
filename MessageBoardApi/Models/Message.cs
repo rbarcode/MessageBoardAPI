@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace MessageBoardApi.Models
 {
@@ -12,9 +13,12 @@ namespace MessageBoardApi.Models
 
     public int UserId { get; set; }
 
+    [JsonIgnore]
     public Group Group { get; set; } // navigation property - One to Many
 
     public User User { get; set; } // navigation property - One to Many
 
   }
 }
+
+

@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using MessageBoardApi.Models;
 using MessageBoardApi.Migrations;
 
-
-
 namespace MessageBoardApi.Controllers;
 
 [Route("api/[controller]")]
@@ -18,7 +16,7 @@ public class MessagesController : ControllerBase
     _db = db;
   }
 
-  // GET: api/messages?groupId=
+  // GET: api/messages{?groupId={id}}
   [HttpGet]
   public async Task<ActionResult<IEnumerable<Message>>> Get(int groupId)
   {
@@ -30,7 +28,7 @@ public class MessagesController : ControllerBase
     }
 
     return await query
-                      .Include(message => message.Group)
+                      // .Include(message => message.Group) // we could still "Include" this, and JsonIgnore will still ignore the data
                       .Include(message => message.User)
                       .ToListAsync();
   }
@@ -40,7 +38,7 @@ public class MessagesController : ControllerBase
   public async Task<ActionResult<Message>> GetMessage(int id)
   {
     Message message = await _db.Messages
-                                        .Include(message => message.Group)
+                                        // .Include(message => message.Group)
                                         .Include(message => message.User)
                                         .FirstOrDefaultAsync(message => message.MessageId == id);
 
@@ -61,10 +59,13 @@ public class MessagesController : ControllerBase
     return CreatedAtAction(nameof(GetMessage), new { id = message.MessageId }, message);
   }
 
-  [HttpPut("{id}")]
-  public async Task<IActionResult> Put(int id, Message message)
+  // PUT: api/messages/{id}?
+  [HttpPut("{id}")] // our route
+  public async Task<IActionResult> Put(int id, Message message, string user_name) //api/messages/1?user_name=R
   {
-    if (id != message.MessageId)
+
+
+    if (id != message.MessageId || !IsAuthor(id, user_name))
     {
       return BadRequest();
     }
@@ -92,6 +93,11 @@ public class MessagesController : ControllerBase
   private bool MessageExists(int id)
   {
     return _db.Messages.Any(e => e.MessageId == id);
+  }
+
+  private bool IsAuthor(int id, string user_name)
+  { // does ANY message exist with BOTH this ID ~AND~ this User?
+    return _db.Messages.Any(e => e.MessageId == id && e.User.Name == user_name);
   }
 
   // DELETE: api/messages/{id}
