@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MessageBoardApi.Models;
-using MessageBoardApi.Migrations;
+// using MessageBoardApi.Migrations;
 
 namespace MessageBoardApi.Controllers;
 

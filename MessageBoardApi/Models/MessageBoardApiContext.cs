@@ -24,9 +24,9 @@ namespace MessageBoardApi.Models
 
       builder.Entity<Message>()
         .HasData(
-          new Message { MessageId = 1, Text = "This new Spider-Man game looks awesome!", GroupId = 1, UserId = 2 },
-          new Message { MessageId = 2, Text = "What did ya'll get for candy? I got rocks.", GroupId = 3, UserId = 1 },
-          new Message { MessageId = 3, Text = "I hate Ciri!", GroupId = 2, UserId = 3 }
+          new Message { MessageId = 1, Text = "This new Spider-Man game looks awesome!", GroupId = 1, UserId = 2, Date = new DateTime(2022, 12, 08, 8, 15, 0) },
+          new Message { MessageId = 2, Text = "What did ya'll get for candy? I got rocks.", GroupId = 3, UserId = 1, Date = new DateTime(2023, 3, 21, 6, 30, 0) },
+          new Message { MessageId = 3, Text = "I hate Ciri!", GroupId = 2, UserId = 3, Date = new DateTime(2020, 5, 13, 8, 11, 0) }
         );
 
       builder.Entity<User>()

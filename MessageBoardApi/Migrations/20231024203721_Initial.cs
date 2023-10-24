@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -77,6 +78,7 @@ namespace MessageBoardApi.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Text = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     GroupId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -97,6 +99,48 @@ namespace MessageBoardApi.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "Groups",
+                columns: new[] { "GroupId", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Spider-Man" },
+                    { 2, "Witcher" },
+                    { 3, "Costumes" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Joey" },
+                    { 2, "Richard" },
+                    { 3, "Onur" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "GroupUsers",
+                columns: new[] { "GroupUserId", "GroupId", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 1, 2 },
+                    { 2, 3, 1 },
+                    { 3, 2, 3 },
+                    { 4, 2, 2 },
+                    { 5, 2, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Messages",
+                columns: new[] { "MessageId", "Date", "GroupId", "Text", "UserId" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2022, 12, 8, 8, 15, 0, 0, DateTimeKind.Unspecified), 1, "This new Spider-Man game looks awesome!", 2 },
+                    { 2, new DateTime(2023, 3, 21, 6, 30, 0, 0, DateTimeKind.Unspecified), 3, "What did ya'll get for candy? I got rocks.", 1 },
+                    { 3, new DateTime(2020, 5, 13, 8, 11, 0, 0, DateTimeKind.Unspecified), 2, "I hate Ciri!", 3 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_GroupUsers_GroupId",
