@@ -13,7 +13,7 @@ namespace MessageBoardApi.Models
 
     public int GroupId { get; set; }
 
-    public string Id { get; set; }
+    public string UserId { get; set; }
 
     [JsonIgnore]
     public Group Group { get; set; } // navigation property - One to Many

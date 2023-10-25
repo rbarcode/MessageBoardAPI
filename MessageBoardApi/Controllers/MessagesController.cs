@@ -108,7 +108,7 @@ public class MessagesController : ControllerBase
 
   private bool IsAuthor(int id, string user_name)
   { // does ANY message exist with BOTH this ID ~AND~ this User?
-    return _db.Messages.Any(e => e.MessageId == id && e.User.Name == user_name);
+    return _db.Messages.Any(e => e.MessageId == id && e.User.UserName == user_name);
   }
 
   // DELETE: api/messages/{id}
