@@ -3,6 +3,7 @@ using System;
 using MessageBoardApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MessageBoardApi.Migrations
 {
     [DbContext(typeof(MessageBoardApiContext))]
-    partial class MessageBoardApiContextModelSnapshot : ModelSnapshot
+    [Migration("20231025200114_AddEmailToSeedUsers")]
+    partial class AddEmailToSeedUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,15 +89,13 @@ namespace MessageBoardApi.Migrations
                         {
                             Id = "abc123",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1858e848-4e5c-4720-9cfa-381d60e8df16",
+                            ConcurrencyStamp = "a4c89348-2c21-42d3-8924-16c17a126dbd",
                             Email = "test1@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "TEST1@TEST.COM",
-                            NormalizedUserName = "JOEY",
-                            PasswordHash = "AQAAAAEAACcQAAAAENNeAK7Cg+/6UDh5KotsF1XsQJxQdEueQsFGtvfjC7K9X2qpneO7MH+VNW4kEKPWzQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMbtbLIMpQqJJ0bDGa/x4RvNFrwP7L5PbzQPx5Ff4ufl9/2+VDL4avzw5wAgmyGENA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "091eb240-5287-4f5d-b7df-73e2257895ca",
+                            SecurityStamp = "18efbc67-d51a-4254-b082-6ec56ebc0de7",
                             TwoFactorEnabled = false,
                             UserName = "Joey"
                         },
@@ -103,15 +103,13 @@ namespace MessageBoardApi.Migrations
                         {
                             Id = "def456",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9b2b802f-ca05-4fbe-8ac4-77ee3c22d081",
+                            ConcurrencyStamp = "e19fa90a-23d1-4946-83d9-158c84160ea2",
                             Email = "test2@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "TEST2@TEST.COM",
-                            NormalizedUserName = "RICHARD",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF0WQ4jiwLOzsjEc6dhynPzeHolWwMdlReEIv/2lcNj0PA44m0h41pLsqf8Jp42mBA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFDtY10LG4JbcpKI7MOUXappwXOMkvSaw0LS1aQm+wMpobY+xbqj7d0AmS+wDEesXA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a7668cb5-1af9-4ea8-9d02-9624a488fd2e",
+                            SecurityStamp = "067cf589-389e-4796-81a3-93723dd15bae",
                             TwoFactorEnabled = false,
                             UserName = "Richard"
                         },
@@ -119,15 +117,13 @@ namespace MessageBoardApi.Migrations
                         {
                             Id = "ghi789",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "88bc34c0-5e43-4e10-9463-8270ca9e0110",
+                            ConcurrencyStamp = "1b32dedd-0dbe-4d58-bbf6-d370bbcdc735",
                             Email = "test3@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "TEST3@TEST.COM",
-                            NormalizedUserName = "ONUR",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB6FX899grUhPuLEjcjRVHRGM0tEnhqGgx0tCGZsNd9FJKUhhBJvkJGOYRF3BRe9/Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENXZhUt58UkPObOggxFuOhI91wP/aPxu8uHZTuBe6E1gL9+vD4Fk+47uGIqgMPZR+A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d8a5d49f-7254-4cf1-9cf2-a0acf6f9a180",
+                            SecurityStamp = "58c131b9-73be-4951-96d1-1b8d95692107",
                             TwoFactorEnabled = false,
                             UserName = "Onur"
                         });

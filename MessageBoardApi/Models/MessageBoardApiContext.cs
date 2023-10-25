@@ -33,9 +33,9 @@ namespace MessageBoardApi.Models
 
       builder.Entity<ApplicationUser>()
         .HasData(
-          new ApplicationUser { Id = "abc123", UserName = "Joey", PasswordHash = hasher.HashPassword(null, "IAmGroot") },
-          new ApplicationUser { Id = "def456", UserName = "Richard", PasswordHash = hasher.HashPassword(null, "IAmGroot") },
-          new ApplicationUser { Id = "ghi789", UserName = "Onur", PasswordHash = hasher.HashPassword(null, "IAmGroot") }
+          new ApplicationUser { Id = "abc123", UserName = "Joey", NormalizedUserName = "JOEY", PasswordHash = hasher.HashPassword(null, "IAmGroot"), Email = "test1@test.com", NormalizedEmail = "TEST1@TEST.COM" },
+          new ApplicationUser { Id = "def456", UserName = "Richard", NormalizedUserName = "RICHARD", PasswordHash = hasher.HashPassword(null, "IAmGroot"), Email = "test2@test.com", NormalizedEmail = "TEST2@TEST.COM" },
+          new ApplicationUser { Id = "ghi789", UserName = "Onur", NormalizedUserName = "ONUR", PasswordHash = hasher.HashPassword(null, "IAmGroot"), Email = "test3@test.com", NormalizedEmail = "TEST3@TEST.COM" }
         );
 
       builder.Entity<GroupUser>()

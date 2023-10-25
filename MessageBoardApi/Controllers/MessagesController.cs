@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MessageBoardApi.Models;
+using Microsoft.AspNetCore.Authorization;
 // using MessageBoardApi.Migrations;
 
 namespace MessageBoardApi.Controllers;
 
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class MessagesController : ControllerBase
