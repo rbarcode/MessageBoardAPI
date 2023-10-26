@@ -46,5 +46,26 @@ public class GroupsController : ControllerBase
     return thisGroup;
   }
 
+  // GET: api/groups/{id}/messages/{id}
+  [HttpGet("{id}/messages/{messageId}")]
+  public async Task<ActionResult<IEnumerable<Message>>> GetMessage(int id, int messageId)
+  {
+    IQueryable<Message> query = _db.Messages
+                                            .Where(m => m.GroupId == id)
+                                            .Where(m => m.MessageId == messageId)
+                                            .AsQueryable();
+    return await query.ToListAsync();
+  }
 
+  // POST: api/groups/{id}/messages
+  [HttpPost("{id}/messages")]
+  public async Task<ActionResult<Message>> PostMessage(int id, Message message)
+  {
+    message.GroupId = id;
+    message.UserId = User.Claims.Where(u => u.Type == "UserId").FirstOrDefault().Value;
+    message.Date = DateTime.Now;
+    _db.Messages.Add(message);
+    await _db.SaveChangesAsync();
+    return CreatedAtAction(nameof(GetMessage), new { id = id, messageId = message.MessageId }, message);
+  }
 }

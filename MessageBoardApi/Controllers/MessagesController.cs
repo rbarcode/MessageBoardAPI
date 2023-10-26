@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MessageBoardApi.Models;
 using Microsoft.AspNetCore.Authorization;
-// using MessageBoardApi.Migrations;
+
 
 namespace MessageBoardApi.Controllers;
 
@@ -62,6 +62,28 @@ public class MessagesController : ControllerBase
 
     return message;
   }
+
+  //THIS GET METHOD ONLY RETURNS THE MESSAGE IF THE USER WAS THE AUTHOR
+  // GET: api/messages/{id}
+  // [HttpGet("{id}")]
+  // public async Task<ActionResult<Message>> GetMessage(int id)
+  // {
+  //   string userId = User.Claims.Where(entry => entry.Type == "UserId").FirstOrDefault().Value;
+  //   // ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+
+  //   Message message = await _db.Messages
+  //                                       .Where(entry => entry.User.Id == userId)
+  //                                       // .Include(message => message.Group)
+  //                                       .Include(message => message.User)
+  //                                       .FirstOrDefaultAsync(message => message.MessageId == id);
+
+  //   if (message == null)
+  //   {
+  //     return NotFound();
+  //   }
+
+  //   return message;
+  // }
 
   // POST: api/messages
   [HttpPost]

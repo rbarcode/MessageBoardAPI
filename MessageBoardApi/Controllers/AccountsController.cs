@@ -21,7 +21,7 @@ public class AccountsController : ControllerBase
 
     public AccountsController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration)
     {
-        _userManager = userManager; 
+        _userManager = userManager;
         _signInManager = signInManager;
         _configuration = configuration;
     }
